@@ -1,0 +1,331 @@
+
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="pellicule\LOGO FOND 32x32 px.png"/>
+  <title>Ndiemane Immo</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+
+    .card{
+      cursor: pointer;
+    }
+
+    #search{
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header class="sticky">
+    <div class="logo">
+    <a href="acceuil.html"><img src="pellicule/logo NI.png" alt="Logo" /></a>
+    </div>
+    <div class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+  <nav class="nav">
+    <div class="nav-links" id="navMenu">
+      <a href="acceuil.html" class="nav-link" style="color: #5B3021;">Accueil</a>
+      <a href="Louer.html" class="nav-link">Louer</a>
+      <a href="Construire.html" class="nav-link">Construire</a>
+      <a href="Acheter.html" class="nav-link">Acheter</a>
+      <a href="contact.html" class="nav-link">Contact Us</a>
+    </div>
+
+
+      <!-- Profil utilisateur connecté -->
+      <div class="nav-profile">
+        <i class="fas fa-user-circle" style="font-size: 22px; color: #5B3021; margin-right: 8px;"></i>
+        <span style="color: #5B3021;" id="welcomeMessage">Bienvenue</span>
+        <div class="dropdown-profile" style="background-color: #BC8F86;">
+          <ul>
+            <li><a href="#" id="openProfileModal"><i class="fas fa-user"></i> Mon profil</a></li>
+            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal de profil -->
+<div class="modal" id="profileModal">
+  
+  <div class="modal-content">
+    <span class="close" id="closeProfileModal">&times;</span>
+    <h3>Mon Profil</h3>
+    
+    <!-- Page 1 : Informations du profil -->
+    <div class="profile-page">
+      <form id="profileForm" action="update_profile.php" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="firstName">Prénom</label>
+          <input type="text" id="firstName" name="firstName" value="John" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Nom</label>
+          <input type="text" id="lastName" name="lastName" value="Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="john.doe@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Numéro de téléphone</label>
+          <input type="tel" id="phone" name="phone" value="1234567890" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Adresse</label>
+          <input type="text" id="address" name="address" value="123 rue de Paris" required>
+        </div>
+        <div class="form-group">
+          <label for="profilePic">Photo de profil</label>
+          <input type="file" id="profilePic" name="profilePic" accept="image/*">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="submit-btn">Mettre à jour</button>
+        </div>
+        <div id="updateMessage" style="margin-top: 10px; font-weight: bold;"></div>
+      </form>
+    </div>
+    
+    <!-- Page 2 : Changer le mot de passe -->
+    <div class="password-change-page" style="display: none;">
+      <form id="passwordChangeForm">
+        <label for="currentPassword">Mot de passe actuel</label>
+        <input type="password" id="currentPassword" required>
+
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input type="password" id="newPassword" required>
+
+        <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+        <input type="password" id="confirmPassword" required>
+
+        <button type="submit">Changer le mot de passe</button>
+        <p id="passwordMessage" style="margin-top: 10px;"></p>
+      </form>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <a href="#" class="prev" id="prevPage">Précédent</a>
+      <a href="#" class="active">1</a>
+      <a href="#" id="nextPage">2</a>
+    </div>
+  </div>
+</div>
+      
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-content">
+      <h1 style="font-size:48px;">Des lieux rares, une vie citadine à votre image</h1>
+      <p style="font-size: 16px;">L’excellence immobilière à votre portée</p>
+      <div class="search-bar">
+        <i class="fa-solid fa-search" id="search"></i>
+        <input type="text" placeholder="Adresse, ville ou quartier...">
+        <!-- <div style="width: 80px;height: 40px; border-radius: 70px;">
+          <i style="cursor: pointer; margin-top: 10px;" class="fa-solid fa-filter" id="filterToggle" ></i>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal de filtre -->
+  <div id="filterModal" class="modal">
+    <div class="modal-content">
+      <i class="fa-solid fa-xmark close-icon" id="modalClose"></i>
+      <h2>Filtres de recherche</h2>
+
+      <div class="filter-group">
+        <i class="fa-solid fa-house"></i>
+        <select>
+          <option>Type de bien</option>
+          <option>Appartement</option>
+          <option>Villa</option>
+          <option>Studio</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <i class="fa-solid fa-location-dot"></i>
+        <input type="text" placeholder="Ville ou quartier">
+      </div>
+
+      <div class="filter-group">
+        <i class="fa-solid fa-euro-sign"></i>
+        <input type="number" placeholder="Prix max">
+      </div>
+
+      <div class="modal-buttons">
+        <button class="close-btn" id="closeBtn">Fermer</button>
+        <button class="apply-btn">Appliquer</button>
+      </div>
+    </div>
+  </div>
+  <!-- Section Présentation -->
+  <section class="presentation">
+    <div class="presentation-container">
+      <div class="text-side">
+        <h2>Présentation</h2>
+        <p>Chez Ndiemane Immo, nous croyons que chaque maison est plus qu’un simple bien immobilier.</p>
+        <p>Nous voulons que chaque client reparte avec plus qu’un contrat : une bénédiction. Une maison doit être un espace de vie, de prière et de bonheur partagé. C’est pourquoi notre agence se consacre à offrir à nos clients un service basé sur la confiance et la bienveillance.</p>
+        <button id="openModal">En savoir plus</button>
+      </div>
+      <div class="image-side">
+        <img src="pellicule\Rectangle 123.png" alt="présentation">
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <h3>À propos de Ndiemane Immo</h3>
+      <p>Nous vous accompagnons dans chaque étape de votre projet immobilier avec bienveillance et professionnalisme. Notre mission est de vous aider à trouver un lieu de vie qui vous ressemble.</p>
+    </div>
+  </div>
+  <!-- Section Sélections du moment -->
+  <section style="background:#fff; padding: 60px 20px;">
+    <div style="max-width: 1200px; margin: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="font-size: 28px; color: #222;">Découvrez nos sélections du moment</h2>
+        <a href="#" style="color: #5B3021; font-weight: bold; text-decoration: none;">Voir toutes les propriétés</a>
+      </div>
+      <div class="cards-grid" id="cardsGrid">
+      </div>
+    </div>
+  </section>
+  <!-- Section Choisissez votre ville -->
+  <section style="background:#fff; padding: 60px 20px; text-align: center;">
+    <div style="max-width: 1200px; margin: auto;">
+      <h2 style="font-size: 28px; color: #222; margin-bottom: 40px;">Choisissez votre ville</h2>
+      <div class="ville-grid">
+        <div class="ville-card">
+          <img src="pellicule\h23.jpg.png" alt="Dakar">
+          <h3>Dakar</h3>
+        </div>
+        <div class="ville-card">
+          <img src="pellicule\h24.jpg.png" alt="Sine">
+          <h3>Sine</h3>
+        </div>
+        <div class="ville-card">
+          <img src="pellicule\téléchargement (2).jpeg" alt="Saly">
+          <h3>Saly</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img style="margin-top: -10px;"src="pellicule\logo NI.png" alt="Logo NDIEMANE IMMO">
+        <p style="margin-top: -10px;">Nous voulons que chaque client reparte avec plus qu’un contrat : une bénédiction. Une maison doit être un espace de vie, de prière et de bonheur partagé. C’est pourquoi notre agence se consacre à offrir à nos clients un service basé sur la confiance et la bienveillance.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Liens rapides</h4>
+        <ul>
+          <li><a href="acceuil.html">Accueil</a></li>
+            <li><a href="Louer.html">Louer</a></li>
+            <li><a href="Construire.html">Construire</a></li>
+            <li><a href="Acheter.html">Acheter</a></li>
+            <li><a href="contact.html">Contactez-nous</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contacter nous</h4>
+        <p><i class="fas fa-envelope"></i> Ndiemaneimmo@company</p>
+        <p><i class="fas fa-phone"></i> +221 78 427 90 96</p>
+        <p><i class="fas fa-map-marker-alt"></i> Memoz, cité keur<br>gorgui, sacré coeur</p>
+      </div>
+    </div>
+  </footer>
+  <button id="scrollTopBtn" title="Retour en haut">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+  
+  <script>
+
+function addCardClickEvents(allData) {
+  const cards = document.querySelectorAll('.card');
+
+  cards.forEach(card => {
+    card.addEventListener('click', () => {
+      // Récupérer l'id de la carte cliquée
+      const id = card.getAttribute('id');
+      console.log(id)
+
+      // Trouver l'objet correspondant dans allData
+      const selectedObject = allData.find(obj => obj.id == id);
+
+      if (selectedObject) {
+        // Stocker l'objet dans localStorage (sous forme JSON)
+        localStorage.setItem('selectedProperty', JSON.stringify(selectedObject));
+
+        // Rediriger vers la page detail
+        window.location.href = 'detail.html';
+      } else {
+        console.error("Objet non trouvé");
+      }
+    });
+  });
+}
+
+    // Exemple d'URL d'API 
+    const apiUrl = 'https://back-ndieme.vercel.app/instituts_export.json';
+
+    // Fonction pour créer une carte
+    function createCard(data) {
+      return `
+        <div class="card" id='${data.id}'>
+          <img src="pellicule/${data.id}.png" alt="${data.nom}">
+          <div class="card-body">
+            <h4>${data.nom}</h4>
+            <p class="price">${data.prix}</p>
+            <p class="location"><i class="fa-solid fa-location-dot"></i> ${data.lieu}</p>
+            <span class="badge">${data.typeInstitut}</span>
+          </div>
+        </div>
+      `;
+    }
+      fetch(apiUrl)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Erreur lors de la récupération des données");
+          }
+          return response.json();
+        })
+        .then(data => {
+          const grid = document.getElementById("cardsGrid");
+          data.forEach(item => {
+          
+            grid.innerHTML += createCard(item);
+          });
+          addCardClickEvents(data)
+        })
+        .catch(error => {
+          console.error("Erreur:", error);
+        });
+
+        
+
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>

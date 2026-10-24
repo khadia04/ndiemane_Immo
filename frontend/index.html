@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="pellicule\LOGO FOND 32x32 px.png"/>
+  <title>Connexion</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    a {
+      color: inherit; /* ou tu peux mettre une couleur personnalisée, ex: black, #333, etc. */
+      text-decoration: none;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: white;
+      color: black;
+      padding: 20px;
+    }
+
+    .container {
+      display: flex;
+      width: 100%;
+      max-width: 1100px;
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      position: relative;
+    }
+
+    .form-section {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+
+    input:focus {
+      border-color: #5B3021;
+      outline: none;
+      box-shadow: 0 0 8px rgba(91, 48, 33, 0.3);
+    }
+
+    .password-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .password-wrapper input {
+      flex: 1;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #5B3021;
+      font-size: 14px;
+    }
+
+    .forgot-password {
+      text-align: right;
+      font-size: 13px;
+    }
+
+    .forgot-password a {
+      text-decoration: none;
+      color: #3b4eff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button[type="submit"] {
+      background: #5B3021;
+      color: white;
+      padding: 14px;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background: #3e2016;
+    }
+
+    .divider {
+      margin: 30px 0 20px;
+      height: 1px;
+      background-color: #eee;
+      position: relative;
+    }
+
+    .divider span {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: white;
+      padding: 0 10px;
+      font-size: 13px;
+      color: #666;
+    }
+
+    .link-text {
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .link-text a {
+      color: #3b4eff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .image-section {
+      flex: 1;
+      background-image: url('https://raw.githubusercontent.com/khadia04/pellicule-NI/main/chris-lee-70l1tDAI6rM-unsplash%201.png');
+      background-size: cover;
+      background-position: center;
+    }
+
+    .back-home {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: transparent;
+      border: 2px solid #5B3021;
+      color: #5B3021;
+      padding: 8px 14px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .back-home:hover {
+      background-color: #5B3021;
+      color: white;
+    }
+
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 400px;
+      width: 90%;
+      position: relative;
+      animation: slideDown 0.3s ease;
+    }
+
+    .modal-content h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .modal-content input {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .modal-content button {
+      width: 100%;
+      padding: 10px;
+      background-color: #5B3021;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .modal-content .close-modal {
+      background: #ccc;
+      color: black;
+      margin-top: 10px;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .image-section {
+        height: 200px;
+      }
+
+      .form-section {
+        padding: 20px;
+      }
+
+      h1 {
+        font-size: 22px;
+      }
+
+      .back-home {
+        top: 10px;
+        left: 10px;
+        font-size: 12px;
+        padding: 6px 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+     <!-- <a href="acceuil.html" class="back-home">← Accueil</a>  -->
+    <div class="form-section">
+      <h1>Connexion</h1>
+      <form id="loginForm">
+        <label for="email">Adresse mail</label>
+        <input type="email" id="email" placeholder="Entrez votre email" required />
+
+        <label for="password">Mot de passe</label>
+        <div class="password-wrapper">
+          <input type="password" id="password" placeholder="Mot de passe" required />
+          <button type="button" class="toggle-password" onclick="togglePassword()">Afficher</button>
+        </div>
+
+        <div class="forgot-password">
+          <a onclick="openModal()">Mot de passe oublié ?</a>
+        </div>
+
+        <button type="submit" onclick="login()"><a href="">Connectez-vous</a></button>
+        <div id="errorMessage" class="alert alert-danger d-none" role="alert">
+          Email ou Mot de passe incorrect.
+        </div>
+      </form>
+
+      <div class="divider"><span>ou</span></div>
+      <p class="link-text">Tu n’as pas de compte ? <a href="inscription.html">Inscris-toi</a></p>
+    </div>
+    <div class="image-section"></div>
+  </div>
+
+  <!-- Modal de récupération -->
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <h2>Réinitialiser le mot de passe</h2>
+      <input type="email" placeholder="Votre adresse email" />
+      <button>Envoyer</button>
+      <button class="close-modal" onclick="closeModal()">Fermer</button>
+    </div>
+  </div>
+
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById("password");
+      const toggleBtn = document.querySelector(".toggle-password");
+
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        toggleBtn.textContent = "Masquer";
+      } else {
+        passwordInput.type = "password";
+        toggleBtn.textContent = "Afficher";
+      }
+    }
+
+    function openModal() {
+      document.getElementById("modal").style.display = "flex";
+    }
+
+    function closeModal() {
+      document.getElementById("modal").style.display = "none";
+    }
+
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value.trim();
+
+      if (!email || !password) {
+        alert("Veuillez remplir tous les champs !");
+      } else {
+        alert("Connexion réussie ! (Simulation)");
+        
+      }
+    });
+    
+    function showError() {
+      const errorDiv = document.getElementById('errorMessage');
+      errorDiv.classList.remove('d-none');
+      errorDiv.textContent = "Erreur de connexion à la base de données !";
+    };
+
+    function login() {
+  if (event) event.preventDefault();
+
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+
+  if (!email || !password) {
+    displayMessage("Veuillez remplir tous les champs");
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  let foundUser = null;
+  for (const username in users) {
+    if (users[username].email === email) {
+      foundUser = users[username];
+      break;
+    }
+  }
+
+  if (!foundUser) {
+    showError("Aucun compte trouvé avec cet email");
+    return;
+  }
+
+  if (foundUser.password !== password) {
+    showError("Mot de passe incorrect");
+    return;
+  }
+
+  // Si la connexion est réussie, on peut stocker l'utilisateur connecté
+  localStorage.setItem("loggedInUser", JSON.stringify(foundUser));
+
+  setTimeout(() => {
+    window.location.href = "acceuil.html"; // ou autre chemin
+  }, 1000);
+}
+
+
+  </script>
+</body>
+</html>

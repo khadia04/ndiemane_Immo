@@ -1,0 +1,13 @@
+# Vidéos (trop lourdes pour GitHub : limite 100 Mo par fichier)
+*.MOV
+*.mov
+*.mp4
+
+# Fichier créé par erreur (sortie d'une commande git log)
+h origin main
+
+# Système / éditeur
+.DS_Store
+Thumbs.db
+.vscode/
+.env

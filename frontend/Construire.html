@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="construire.css">
+    <link rel="icon" href="pellicule\LOGO FOND 32x32 px.png"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+</head>
+<body>
+   <header class="sticky">
+    <div class="logo">
+    <a href="acceuil.html"><img src="pellicule/logo NI.png" alt="Logo" /></a>
+    </div>
+    <div class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+  <nav class="nav">
+    <div class="nav-links" id="navMenu">
+      <a href="acceuil.html" class="nav-link" style="color: #5B3021;">Accueil</a>
+      <a href="Louer.html" class="nav-link">Louer</a>
+      <a href="Construire.html" class="nav-link">Construire</a>
+      <a href="Acheter.html" class="nav-link">Acheter</a>
+      <a href="contact.html" class="nav-link">Contact Us</a>
+    </div>
+
+
+      <!-- Profil utilisateur connecté -->
+      <div class="nav-profile">
+        <i class="fas fa-user-circle" style="font-size: 22px; color: #5B3021; margin-right: 8px;"></i>
+        <span style="color: #5B3021;" id="welcomeMessage">Bienvenue</span>
+        <div class="dropdown-profile" style="background-color: #BC8F86;">
+          <ul>
+            <li><a href="#" id="openProfileModal"><i class="fas fa-user"></i> Mon profil</a></li>
+            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal de profil -->
+<div class="modal" id="profileModal">
+  
+  <div class="modal-content">
+    <span class="close" id="closeProfileModal">&times;</span>
+    <h3>Mon Profil</h3>
+    
+    <!-- Page 1 : Informations du profil -->
+    <div class="profile-page">
+      <form id="profileForm" action="update_profile.php" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="firstName">Prénom</label>
+          <input type="text" id="firstName" name="firstName" value="John" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Nom</label>
+          <input type="text" id="lastName" name="lastName" value="Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="john.doe@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Numéro de téléphone</label>
+          <input type="tel" id="phone" name="phone" value="1234567890" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Adresse</label>
+          <input type="text" id="address" name="address" value="123 rue de Paris" required>
+        </div>
+        <div class="form-group">
+          <label for="profilePic">Photo de profil</label>
+          <input type="file" id="profilePic" name="profilePic" accept="image/*">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="submit-btn">Mettre à jour</button>
+        </div>
+        <div id="updateMessage" style="margin-top: 10px; font-weight: bold;"></div>
+      </form>
+    </div>
+    
+    <!-- Page 2 : Changer le mot de passe -->
+    <div class="password-change-page" style="display: none;">
+      <form id="passwordChangeForm">
+        <label for="currentPassword">Mot de passe actuel</label>
+        <input type="password" id="currentPassword" required>
+
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input type="password" id="newPassword" required>
+
+        <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+        <input type="password" id="confirmPassword" required>
+
+        <button type="submit">Changer le mot de passe</button>
+        <p id="passwordMessage" style="margin-top: 10px;"></p>
+      </form>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <a href="#" class="prev" id="prevPage">Précédent</a>
+      <a href="#" class="active">1</a>
+      <a href="#" id="nextPage">2</a>
+    </div>
+  </div>
+</div>
+      
+    </nav>
+  </header>
+  <section class="hero">
+    <div class="hero-content">
+      <h1 style="font-size:48px;">Des lieux rares, une vie citadine à votre image</h1>
+      <p style="font-size: 16px;">L’excellence immobilière à votre portée</p>
+      
+    </div>
+  </section>
+
+    <!-- Construction d’une maison au Sénégal   -->
+  <section class="grd" style="background:#fff; padding: 60px 20px;">
+<div class="section-construction" style="max-width: 1200px; margin: auto;">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+    <h1 style=" color: #222;">Construction d’une maison au Sénégal</h1>
+  </div>
+  <div class="sec4">
+    <div class="gsec4">
+      <img src="pellicule/ImageConstruire.png" alt="Construction d'une maison">
+    </div>
+    <div class="sec4-text">
+      <img src="pellicule/Rectangle.png" alt="" class="underline-img">
+      <h2>Notre guide</h2>
+      <p>
+        Un projet de construction de maison au Sénégal pour 2025 ? Vous êtes au bon endroit ! Dans cet article,
+        nous vous proposons un guide complet pour bien construire votre maison au Sénégal,
+        en prenant en compte les aspects économiques, techniques et pratiques,
+        afin que vous ayez toutes les clés en main pour la réalisation de votre projet de vie. Bonne lecture !
+      </p>
+    </div>
+  </div>
+</div>
+
+     <div class="terrain-section" style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+  <div class="chose">
+    <h2 style="font-size: 2.2rem; color: #222; width: 100%; text-align: center;">
+      Choisir le bon terrain pour votre maison
+    </h2>
+  </div>
+
+  <div class="chimg" style="margin-top: 1.5rem;">
+    <img src="pellicule/imageConstruir.png" alt="Image de terrain à bâtir au Sénégal" style="width: 100%; height: auto; display: block;">
+  </div>
+
+  <div class="par" style="margin-top: 2rem;">
+    <p style="font-size: 1.1rem; letter-spacing: 1px; word-spacing: 3px; line-height: 1.8;">
+      La première étape dans la construction d’une maison au Sénégal est de trouver le terrain idéal.
+      Voici quelques facteurs à prendre en compte lors de votre recherche :
+    </p>
+
+    <p style="font-size: 1.1rem; letter-spacing: 1px; word-spacing: 3px; line-height: 1.8;">
+      <strong>La localisation :</strong> Selon que vous souhaitez construire en ville ou à la campagne,
+      les prix des terrains et les caractéristiques varieront. Les zones les plus prisées sont Dakar, la
+      capitale, la Petite Côte avec Saly, Ngaparou et la Somone. Enfin, les principales villes régionales
+      comme Saint-Louis, Thiès et Ziguinchor attirent également de plus en plus de monde.
+    </p>
+
+    <p style="font-size: 1.1rem; letter-spacing: 1px; word-spacing: 3px; line-height: 1.8;">
+      <strong>La superficie :</strong> La superficie du terrain influera sur le prix, mais aussi sur les
+      possibilités de construction. Pensez à vérifier les règles d’urbanisme locales et les servitudes qui
+      pourraient s’appliquer à votre terrain.
+    </p>
+
+    <p style="font-size: 1.1rem; letter-spacing: 1px; word-spacing: 3px; line-height: 1.8;">
+      <strong>L’accès aux services :</strong> L’eau, l’électricité et les réseaux de communication sont des
+      éléments primordiaux à prendre en compte. Assurez-vous que votre terrain est bien desservi par ces
+      services et qu’il soit viabilisé (ou que cette dernière soit possible).
+    </p>
+  </div>
+</div>
+
+     <section class="pt2" style="margin-top: 8%; ">
+      <div class="texim" style="display: flex;">
+        <div style="margin-left: 3%; position: relative;">
+        <h2 style="font-size: 26px; color: #222; margin-top: 19%; " >coûts de construction  </h2>
+        <p class="int">
+          Le coût de construction d’une maison au Sénégal dépend de nombreux facteurs, tels que la superficie,
+          les matériaux utilisés, le type de construction et le niveau de finition souhaité
+        </p>
+        </div>
+        <div class="ima" >
+        <img src="pellicule/imageConst5.png" alt="imageconst5" style="width: 100%; margin-left: -5%" >
+        </div>
+      </div>
+      </section> 
+    </section>
+    <h2 style="font-size: 26px; color: #222; margin-top: 1%; margin-left: 5%; " >Pour plus d’information veuillez  remplir ce formulaire. </h2>
+     
+       <section class="contact-section">
+        <div class="contact-container">
+          <div class="contact-image">
+            <img src="pellicule/imageConsF.png" alt="Bannière Contact">
+          </div>
+
+          <div class="contact-form-wrapper">
+            <img src="pellicule/logo%20NI.png" alt="Logo" class="contact-logo">
+            <p>
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:Ndiemanenimmo@company">Ndiemaenimmo@gmail.com</a>
+            </p>
+            <p>
+              <i class="fas fa-phone-alt"></i>
+              <a href="tel:+221765630430">+221784279096</a>
+            </p>
+
+            <form id="contactForm">
+              <input type="text" name="name" placeholder="Nom complet*" required class="animate-input">
+              <input type="tel" name="phone" placeholder="Numéro de téléphone*" required class="animate-input">
+              <input type="email" name="email" placeholder="Adresse e-mail*" required class="animate-input">
+              <textarea name="message" rows="4" placeholder="Message*" required class="animate-input"></textarea>
+              <button type="submit" class="submit-btn">Envoyer le message</button>
+              <div class="confirmation-message" id="confirmationMessage" style="display: none;">
+                Message envoyé avec succès !
+              </div>
+            </form>
+
+            <div class="contact-actions">
+              <a href="tel:+221784279096" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+              <a href="tel:+221784279096" class="call-btn"><i class="fas fa-phone"></i> Appeler</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+ 
+  
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img style="margin-top: -10px;"src="pellicule\logo NI.png" alt="Logo NDIEMANE IMMO">
+        <p style="margin-top: -10px;">Nous voulons que chaque client reparte avec plus qu’un contrat : une bénédiction. Une maison doit être un espace de vie, de prière et de bonheur partagé. C’est pourquoi notre agence se consacre à offrir à nos clients un service basé sur la confiance et la bienveillance.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Liens rapides</h4>
+        <ul>
+          <li><a href="acceuil.html">Accueil</a></li>
+            <li><a href="Louer.html">Louer</a></li>
+            <li><a href="Construire.html">Construire</a></li>
+            <li><a href="Acheter.html">Acheter</a></li>
+            <li><a href="contact.html">Contactez-nous</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contacter nous</h4>
+        <p><i class="fas fa-envelope"></i> Ndiemaneimmo@company</p>
+        <p><i class="fas fa-phone"></i>+221 78 427 90 96</p>
+        <p><i class="fas fa-map-marker-alt"></i> Memoz, cité keur<br>gorgui, sacré coeur</p>
+      </div>
+    </div>
+  </footer>
+  <button id="scrollTopBtn" title="Retour en haut">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+  <script src="construire.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

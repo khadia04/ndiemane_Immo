@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon"  href="pellicule\LOGO FOND 32x32 px.png"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+      body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* style du header */
+header.sticky {
+  position: sticky;
+  top: 0;
+  background-color: #BC8F86;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  height: 57px;
+}
+
+/* logo */
+.logo img {
+  height: 100px;
+  padding: 20px;
+  transition: transform 0.5s ease, filter 0.3s ease;
+}
+.logo img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* navbar */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links a,
+.nav-actions a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 15px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav a:hover {
+  color: #5B3021;
+  transform: scale(1.1);
+}
+
+.nav a.active {
+  border-radius: 8px;
+  color: #fff;
+}
+
+
+
+/* Toggle caché en desktop */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1100; /* S'assurer qu'il soit au-dessus */
+}
+
+.card{
+  cursor: pointer;
+}
+
+/* RESPONSIVité */
+@media (max-width: 768px) {
+  .logo img {
+    gap: 20px;
+    height: 110px;
+  }
+
+  .nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: block;
+    right: -100px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 200px;
+    background-color: #BC8F86;
+    position: absolute;
+    top: 54px;
+    right: 0;
+    padding: 1rem;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .nav-profile{
+    right: -40px;
+    position: relative;
+  }
+  .dropdown-profile {
+    top: 100%;
+    right: 0;
+    left: auto;
+    transform: translateY(1px);
+    z-index: 2000;
+  }
+}
+
+/* style du profil */
+.nav-profile {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdown-profile {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: none;
+  z-index: 100;
+  min-width: 160px;
+}
+
+.dropdown-profile ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.dropdown-profile li {
+  padding: 10px 20px;
+}
+
+.dropdown-profile li a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-profile li:hover {
+  background-color:#BC8F86;
+}
+
+.nav-profile:hover .dropdown-profile {
+  display: block;
+}
+
+/* Modal Profil */
+.modal {
+  display: none; /* Cacher le modal par défaut */
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.modal.show {
+   display: flex; /* Afficher le modal lorsqu'il a la classe .show */
+}
+
+.modal-content {
+  background-color: #BC8F86;
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 600px;
+  height: 600px;
+  width: 90%;
+  position: relative;
+  color: #333;
+  animation: slideUp 0.4s ease;
+  overflow-y: auto; /* Permet au contenu de défiler à l'intérieur du modal */
+  box-sizing: border-box; /* S'assure que le padding ne dépasse pas la hauteur */
+}
+
+.modal-content h3 {
+  color: #5B3021;
+  font-size: 24px;
+}
+
+.modal-content label {
+  font-weight: bold;
+  color: #5B3021;
+  font-size: 14px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.modal-content .submit-btn {
+  background-color: #5B3021;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.modal-content .submit-btn:hover {
+  background-color: #3c1e14;
+}
+
+.modal-content hr {
+  margin: 20px 0;
+  border-color: #ddd;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  color: #5B3021;
+  cursor: pointer;
+}
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  padding: 10px 15px;
+  text-decoration: none;
+  background-color: #5B3021;
+  color: white;
+  border-radius: 5px;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+  background-color: #3c1e14;
+}
+
+/* Pagination active */
+.pagination a.active {
+  background-color: #FF0800;
+  color: white;
+}
+
+
+.transition-slide {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Responsivité - Réduire la taille du modal sur mobile */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 20px;
+     max-width: 100%; /* Utilise toute la largeur de l'écran */
+    width: 80%;
+    padding: 10px; /* Réduit encore le padding pour les petits écrans */
+  }
+  
+  .modal-content h3 {
+    font-size: 20px;
+  }
+
+  .modal-content label {
+    font-size: 16px;
+  }
+
+  .modal-content input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .modal-content .submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .close {
+    font-size: 22px;
+  }
+
+  /* Redimensionner les champs de formulaire pour les petits écrans */
+  .modal-content input,
+  .modal-content .submit-btn {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-content {
+    width: 95%;
+    height: 90vh;
+    padding: 1rem;
+  }
+}
+/* Modal en savoir plus presentation */
+.modal-content {
+  padding: 30px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {transform: translateY(30px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}
+
+ /* style du main */
+.hero {
+  background-image: url("https://raw.githubusercontent.com/khadia04/pellicule-NI/36e357a08f2ded9a168a73f1b607dc738fc4913b/IMG-20250524-WA0012.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 350px;
+  background-color: rgba(0, 0, 0, 0.6); /* noir à 60% d'opacité */
+  z-index: 0;
+}
+
+.hero .hero-content {
+  position: relative;
+  z-index: 1; /* le texte reste visible au-dessus du fond assombri */
+}
+.hero input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  border-radius: 30px;
+  border: none;
+  outline: none;
+}
+.hero button {
+  background-color: #5B3021;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+         /* barre de recherche */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 40px;
+      padding: 10px 20px;
+      max-width: 700px;
+      margin: 20px auto 0;
+      overflow: hidden;
+      backdrop-filter: blur(3px);
+    }
+
+    .search-bar i {
+      color: #fff;
+      margin-right: 10px;
+    }
+
+    .search-bar input {
+      border: none;
+      flex: 1;
+      padding: 10px;
+      border-radius: 30px;
+      outline: none;
+      font-size: 16px;
+      background: transparent;
+      color: white;
+    }
+
+    .search-bar input::placeholder {
+      color: #fff;
+    }
+
+    .search-icon {
+      background: #5B3021;
+      color: #fff;
+      padding: 25px 35px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 800px) {
+      .hero{
+        height: auto;
+      }
+      
+      .hero-content p {
+        font-size: 10px;
+      }
+      .hero-content h2 {
+        font-size: 8px;
+      }
+      .search-bar {
+        margin: 20px;
+        padding: 10px;
+        flex-direction: row;
+        height: 90px;
+        display:inline-flexbox;
+        gap: 10px;
+      }
+      .search-icon {
+        width: 100%;
+        justify-items:center;
+      }
+    }
+    /* MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      color: #333;
+      position: relative;
+      animation: slideUp 0.4s ease;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .modal-content .close-icon {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #5B3021;
+    }
+
+    .filter-group {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-group i {
+      color: #5B3021;
+    }
+
+    .filter-group select,
+    .filter-group input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .modal-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .apply-btn {
+      background-color: #5B3021;
+      color: white;
+    }
+
+    .close-btn {
+      background-color: #ccc;
+      color: black;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .search-bar {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .modal-content {
+        padding: 20px;
+      }
+    }
+    /* style du footer */
+.footer {
+  background-color: #BC8F86;
+  color: #2b2b2b;
+  padding: 50px 30px;
+  font-family: 'Inter', sans-serif;
+}
+.footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: auto;
+  animation: fadeIn 1.2s ease-in forwards;
+}
+.footer-logo img {
+  width: 100px;
+  margin-bottom: 15px;
+}
+.footer-logo p {
+  font-size: 14px;
+  margin-bottom: 15px;
+  max-width: 240px;
+}
+.social-icons a {
+  margin-right: 10px;
+  font-size: 18px;
+  color: #1e1e1e;
+  transition: color 0.3s ease;
+}
+.social-icons a:hover {
+  color: white;
+}
+.footer-links ul,
+.footer-links {
+  list-style: none;
+  padding: 0;
+}
+.footer-links h4,
+.footer-contact h4 {
+  margin-bottom: 12px;
+  font-size: 16px;
+  font-weight: bold;
+}
+.footer-links li {
+  margin-bottom: 8px;
+}
+.footer-links a {
+  color: #1e1e1e;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer-links a:hover {
+  color: white;
+}
+.footer-contact p {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+.footer-contact i {
+  margin-right: 8px;
+  color: #1e1e1e;
+}
+@media (max-width: 768px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+#scrollTopBtn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 999;
+  background-color: #5B3021;
+  color: white;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  display: none;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+  background-color: #3e2016;
+  transform: scale(1.1);
+}
+
+    </style>
+</head>
+<body>
+   <header class="sticky">
+    <div class="logo">
+    <a href="index.html"><img src="pellicule/logo NI.png" alt="Logo" /></a>
+    </div>
+    <div class="menu-toggle" id="menuToggle">
+      <i class="fas fa-bars"></i>
+    </div>
+
+  <nav class="nav">
+    <div class="nav-links" id="navMenu">
+      <a href="acceuil.html" class="nav-link" >Accueil</a>
+      <a href="Louer.html" class="nav-link" style="color: #5B3021;">Louer</a>
+      <a href="Construire.html" class="nav-link">Construire</a>
+      <a href="Acheter.html" class="nav-link">Acheter</a>
+      <a href="contact.html" class="nav-link">Contact Us</a>
+    </div>
+
+
+      <!-- Profil utilisateur connecté -->
+      <div class="nav-profile">
+        <i class="fas fa-user-circle" style="font-size: 22px; color: #5B3021; margin-right: 8px;"></i>
+        <span style="color: #5B3021;" id="welcomeMessage">Bienvenue</span>
+        <div class="dropdown-profile" style="background-color: #BC8F86;">
+          <ul>
+            <li><a href="#" id="openProfileModal"><i class="fas fa-user"></i> Mon profil</a></li>
+            <li><a href="#" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Déconnexion</a></li>
+
+          </ul>
+        </div>
+      </div>
+
+      <!-- Modal de profil -->
+<div class="modal" id="profileModal">
+  
+  <div class="modal-content">
+    <span class="close" id="closeProfileModal">&times;</span>
+    <h3>Mon Profil</h3>
+    
+    <!-- Page 1 : Informations du profil -->
+    <div class="profile-page">
+      <form id="profileForm" action="update_profile.php" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label for="firstName">Prénom</label>
+          <input type="text" id="firstName" name="firstName" value="John" required>
+        </div>
+        <div class="form-group">
+          <label for="lastName">Nom</label>
+          <input type="text" id="lastName" name="lastName" value="Doe" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" value="john.doe@email.com" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Numéro de téléphone</label>
+          <input type="tel" id="phone" name="phone" value="1234567890" required>
+        </div>
+        <div class="form-group">
+          <label for="address">Adresse</label>
+          <input type="text" id="address" name="address" value="123 rue de Paris" required>
+        </div>
+        <div class="form-group">
+          <label for="profilePic">Photo de profil</label>
+          <input type="file" id="profilePic" name="profilePic" accept="image/*">
+        </div>
+        <div class="form-group">
+          <button type="submit" class="submit-btn">Mettre à jour</button>
+        </div>
+        <div id="updateMessage" style="margin-top: 10px; font-weight: bold;"></div>
+      </form>
+    </div>
+    
+    <!-- Page 2 : Changer le mot de passe -->
+    <div class="password-change-page" style="display: none;">
+      <form id="passwordChangeForm">
+        <label for="currentPassword">Mot de passe actuel</label>
+        <input type="password" id="currentPassword" required>
+
+        <label for="newPassword">Nouveau mot de passe</label>
+        <input type="password" id="newPassword" required>
+
+        <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+        <input type="password" id="confirmPassword" required>
+
+        <button type="submit">Changer le mot de passe</button>
+        <p id="passwordMessage" style="margin-top: 10px;"></p>
+      </form>
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination">
+      <a href="#" class="prev" id="prevPage">Précédent</a>
+      <a href="#" class="active">1</a>
+      <a href="#" id="nextPage">2</a>
+    </div>
+  </div>
+</div>
+      
+    </nav>
+  </header>
+    <section>
+         <section class="hero">
+    <div class="hero-content" >
+      <h2 style="font-size:40px;">L’excellence immobilière à votre portée</h2>
+      <div class="search-bar" >
+        <i style="cursor: pointer;" class="fa-solid fa-search"></i>
+        <input style="color: #fff;" type="text" placeholder="Adresse, ville ou quartier..." >
+        <div style="width: 80px;height: 40px; border-radius: 70px; ">
+          <i style="cursor: pointer; margin-top: 10px;" class="fa-solid fa-filter" id="filterToggle" ></i>
+        </div>
+        
+      </div>
+    </div>
+  </section>
+    </section>
+    <!-- Modal de filtre -->
+  <div id="filterModal" class="modal">
+    <div class="modal-content">
+      <i class="fa-solid fa-xmark close-icon" id="modalClose"></i>
+      <h2>Filtres de recherche</h2>
+
+      <div class="filter-group">
+        <i class="fa-solid fa-house"></i>
+        <select>
+          <option>Type de bien</option>
+          <option>Appartement</option>
+          <option>Villa</option>
+          <option>Studio</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <i class="fa-solid fa-location-dot"></i>
+        <input type="text" placeholder="Ville ou quartier">
+      </div>
+
+      <div class="filter-group">
+        <i class="fa-solid fa-euro-sign"></i>
+        <input type="number" placeholder="Prix max">
+      </div>
+
+      <div class="modal-buttons">
+        <button class="close-btn" id="closeBtn">Fermer</button>
+        <button class="apply-btn">Appliquer</button>
+      </div>
+    </div>
+  </div>
+    <!-- Votre futur chez-vous vous attend -->
+  <section style="background:#fff; padding: 60px 20px;">
+    <div style="max-width: 1200px; margin: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
+        <h2 style="font-size: 28px; color: #222;">Votre futur chez-vous vous attend</h2>
+
+      </div>
+      <div class="cards-grid" id="cardsGrid">
+      </div>
+    </div>
+  </section>
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img style="margin-top: -10px;"src="pellicule\logo NI.png" alt="Logo NDIEMANE IMMO">
+        <p style="margin-top: -10px;">Nous voulons que chaque client reparte avec plus qu’un contrat : une bénédiction. Une maison doit être un espace de vie, de prière et de bonheur partagé. C’est pourquoi notre agence se consacre à offrir à nos clients un service basé sur la confiance et la bienveillance.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Liens rapides</h4>
+        <ul>
+          <li><a href="acceuil.html">Accueil</a></li>
+            <li><a href="Louer.html">Louer</a></li>
+            <li><a href="Construire.html">Construire</a></li>
+            <li><a href="Acheter.html">Acheter</a></li>
+            <li><a href="contact.html">Contactez-nous</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contacter nous</h4>
+        <p><i class="fas fa-envelope"></i> Ndiemaneimmo@company</p>
+        <p><i class="fas fa-phone"></i> 77 9912701</p>
+        <p><i class="fas fa-map-marker-alt"></i> Memoz, cité keur<br>gorgui, sacré coeur</p>
+      </div>
+    </div>
+  </footer>
+  <button id="scrollTopBtn" title="Retour en haut">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+    <script src="louer.js"></script>
+
+</body>
+</html>

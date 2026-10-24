@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon"  href="pellicule\LOGO FOND 32x32 px.png"/>
+  <title>Contact</title>
+  <link rel="stylesheet" href="contact.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+</head>
+<body>
+    <header class="sticky">
+        <div class="logo">
+            <a href="acceuil.html"><img src="pellicule/logo NI.png" alt="Logo" /></a>
+        </div>
+        <nav class="nav">
+            <div class="menu-toggle" id="menuToggle"><i class="fas fa-bars"></i></div>
+            <div class="nav-links" id="navMenu">
+                <div class="close-menu" id="closeMenu"><i class="fas fa-times"></i></div>
+                <a href="acceuil.html">Accueil</a>
+                <a href="Louer.html">Louer</a>
+                <a href="Construire.html">Construire</a>
+                <a href="Acheter.html">Acheter</a>
+                <a href="contact.html" style="color: #5B3021;">Contactez-nous</a>
+                <div class="nav-icons">
+                    <i class="fas fa-user"></i>
+                    <i class="fas fa-bell"></i>
+                    <i class="fas fa-search"></i>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+      <section class="contact-header">
+        <div class="overlay">
+          <h1>Contactez-nous</h1>
+        </div>
+      </section>
+
+      <section class="contact-section">
+        <div class="contact-container">
+          <div class="contact-image">
+            <img src="pellicule\téléchargement (3).png" alt="Bannière Contact">
+          </div>
+
+          <div class="contact-form-wrapper">
+            <img src="pellicule/logo%20NI.png" alt="Logo" class="contact-logo">
+            <p>
+              <i class="fas fa-envelope"></i>
+              <a href="mailto:Ndiemanenimmo@company">Ndiemaenimmo@gmail.com</a>
+            </p>
+            <p>
+              <i class="fas fa-phone-alt"></i>
+              <a href="tel:+221765630430">+221784279096</a>
+            </p>
+
+            <form id="contactForm">
+              <input type="text" name="name" placeholder="Nom complet*" required class="animate-input">
+              <input type="tel" name="phone" placeholder="Numéro de téléphone*" required class="animate-input">
+              <input type="email" name="email" placeholder="Adresse e-mail*" required class="animate-input">
+              <textarea name="message" rows="4" placeholder="Message*" required class="animate-input"></textarea>
+              <button type="submit" class="submit-btn">Envoyer le message</button>
+              <div class="confirmation-message" id="confirmationMessage">Message envoyé avec succès !</div>
+            </form>
+
+            <div class="contact-actions">
+              <a href="#" class="whatsapp-btn"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+              <a href="tel:+221765630430" class="call-btn"><i class="fas fa-phone"></i> Appeler</a>
+            </div>
+          </div>
+        </div>
+      </section>
+      <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-logo">
+        <img style="margin-top: -10px;"src="pellicule\logo NI.png" alt="Logo NDIEMANE IMMO">
+        <p style="margin-top: -10px;">Nous voulons que chaque client reparte avec plus qu’un contrat : une bénédiction. Une maison doit être un espace de vie, de prière et de bonheur partagé. C’est pourquoi notre agence se consacre à offrir à nos clients un service basé sur la confiance et la bienveillance.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Liens rapides</h4>
+        <ul>
+          <li><a href="acceuil.html">Accueil</a></li>
+            <li><a href="Louer.html">Louer</a></li>
+            <li><a href="Construire.html">Construire</a></li>
+            <li><a href="Acheter.html">Acheter</a></li>
+            <li><a href="contact.html">Contactez-nous</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contacter nous</h4>
+        <p><i class="fas fa-envelope"></i> Ndiemaneimmo@company</p>
+        <p><i class="fas fa-phone"></i>+221 78 427 90 96</p>
+        <p><i class="fas fa-map-marker-alt"></i> Memoz, cité keur<br>gorgui, sacré coeur</p>
+      </div>
+    </div>
+  </footer>
+  <button id="scrollTopBtn" title="Retour en haut">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+    </main>
+    <script src="contact.js"></script>
+</body>
+</html>

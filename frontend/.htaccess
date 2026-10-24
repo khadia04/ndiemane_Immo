@@ -1,0 +1,12 @@
+# Activer mod_rewrite
+RewriteEngine On
+
+# Si le fichier ou dossier n'existe pas, rediriger vers index.html
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.html [QSA,L]
+
+# Autoriser le cross-domain (si besoin d'appels API par JS)
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>

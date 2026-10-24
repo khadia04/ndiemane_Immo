@@ -1,0 +1,686 @@
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+html {
+  scroll-behavior: smooth;
+}
+/* style du header */
+header.sticky {
+  position: sticky;
+  top: 0;
+  background-color: #BC8F86;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  height: 57px;
+}
+
+/* logo */
+.logo img {
+  height: 100px;
+  padding: 20px;
+  transition: transform 0.5s ease, filter 0.3s ease;
+}
+.logo img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.1);
+}
+
+/* navbar */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-links a,
+.nav-actions a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px 15px;
+  transition: color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+}
+
+.nav a:hover {
+  color: #5B3021;
+  transform: scale(1.1);
+}
+
+.nav a.active {
+  border-radius: 8px;
+  color: #fff;
+}
+
+
+
+/* Toggle caché en desktop */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 1100; /* S'assurer qu'il soit au-dessus */
+}
+
+/* RESPONSIVité */
+@media (max-width: 768px) {
+  .logo img {
+    gap: 20px;
+    height: 110px;
+  }
+
+  .nav {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+
+  .menu-toggle {
+    display: block;
+    right: -100px;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 200px;
+    background-color: #BC8F86;
+    position: absolute;
+    top: 54px;
+    right: 0;
+    padding: 1rem;
+  }
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-actions {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .nav-profile{
+    right: -40px;
+    position: relative;
+  }
+  .dropdown-profile {
+    top: 100%;
+    right: 0;
+    left: auto;
+    transform: translateY(1px);
+    z-index: 2000;
+  }
+}
+
+/* style du profil */
+.nav-profile {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.dropdown-profile {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  display: none;
+  z-index: 100;
+  min-width: 160px;
+}
+
+.dropdown-profile ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.dropdown-profile li {
+  padding: 10px 20px;
+}
+
+.dropdown-profile li a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dropdown-profile li:hover {
+  background-color:#BC8F86;
+}
+
+.nav-profile:hover .dropdown-profile {
+  display: block;
+}
+
+/* Modal Profil */
+.modal {
+  display: none; /* Cacher le modal par défaut */
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.4s ease;
+}
+
+.modal.show {
+   display: flex; /* Afficher le modal lorsqu'il a la classe .show */
+}
+
+.modal-content {
+  background-color: #BC8F86;
+  padding: 15px;
+  border-radius: 12px;
+  max-width: 600px;
+  height: 600px;
+  width: 90%;
+  position: relative;
+  color: #333;
+  animation: slideUp 0.4s ease;
+  overflow-y: auto; /* Permet au contenu de défiler à l'intérieur du modal */
+  box-sizing: border-box; /* S'assure que le padding ne dépasse pas la hauteur */
+}
+
+.modal-content h3 {
+  color: #5B3021;
+  font-size: 24px;
+}
+
+.modal-content label {
+  font-weight: bold;
+  color: #5B3021;
+  font-size: 14px;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.modal-content .submit-btn {
+  background-color: #5B3021;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.modal-content .submit-btn:hover {
+  background-color: #3c1e14;
+}
+
+.modal-content hr {
+  margin: 20px 0;
+  border-color: #ddd;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 24px;
+  color: #5B3021;
+  cursor: pointer;
+}
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination a {
+  padding: 10px 15px;
+  text-decoration: none;
+  background-color: #5B3021;
+  color: white;
+  border-radius: 5px;
+  margin: 0 5px;
+  transition: background-color 0.3s ease;
+}
+
+.pagination a:hover {
+  background-color: #3c1e14;
+}
+
+/* Pagination active */
+.pagination a.active {
+  background-color: #FF0800;
+  color: white;
+}
+
+
+.transition-slide {
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Responsivité - Réduire la taille du modal sur mobile */
+@media (max-width: 768px) {
+  .modal-content {
+    padding: 20px;
+     max-width: 100%; /* Utilise toute la largeur de l'écran */
+    width: 80%;
+    padding: 10px; /* Réduit encore le padding pour les petits écrans */
+  }
+  
+  .modal-content h3 {
+    font-size: 20px;
+  }
+
+  .modal-content label {
+    font-size: 16px;
+  }
+
+  .modal-content input {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .modal-content .submit-btn {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+  }
+
+  .close {
+    font-size: 22px;
+  }
+
+  /* Redimensionner les champs de formulaire pour les petits écrans */
+  .modal-content input,
+  .modal-content .submit-btn {
+    width: 100%;
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .modal-content {
+    width: 95%;
+    height: 90vh;
+    padding: 1rem;
+  }
+}
+/* Modal en savoir plus presentation */
+
+.modal-content {
+  padding: 30px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {transform: translateY(30px); opacity: 0;}
+  to {transform: translateY(0); opacity: 1;}
+}
+    /* style du main */
+.hero {
+  padding: 60px 0 30px 0;
+  background: #fafafa;
+}
+
+.hero-content {
+  max-width: 900px;
+  margin-left: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.hero-content h3 {
+  font-size: 48px;
+  font-weight: 600;
+  color: #333333;
+  margin-bottom: 32px;
+  text-align: left;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 700px;
+  background: #cbbcb6;
+  border-radius: 40px;
+  overflow: hidden;
+  box-shadow: none;
+  padding: 0;
+  position: relative;
+}
+
+.search-bar input[type="text"] {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  padding: 18px 24px;
+  font-size: 20px;
+  border-radius: 40px 0 0 40px;
+  color: #5B3021;
+}
+
+.search-bar input[type="text"]::placeholder {
+  color: #5B3021;
+  opacity: 0.7;
+}
+
+.filter-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #5B3021;
+  border-radius: 0 40px 40px 0;
+  width: 60px;
+  height: 56px;
+  cursor: pointer;
+}
+
+.filter-btn i {
+  color: #fff;
+  font-size: 22px;
+}
+
+
+    .search-bar i {
+      color: #fff;
+      margin-right: 10px;
+    }
+
+    .search-bar input {
+      border: none;
+      flex: 1;
+      padding: 10px;
+      border-radius: 30px;
+      outline: none;
+      font-size: 16px;
+      background: transparent;
+      color: white;
+    }
+
+    .search-bar input::placeholder {
+      color: #fff;
+    }
+
+    .search-icon {
+      background: #5B3021;
+      color: #fff;
+      padding: 25px 35px;
+      border-radius: 30px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 800px) {
+      
+      .hero-content {
+        margin-left: 8px;
+        margin-right: 8px;
+        max-width: 100%;
+      }
+      .search-bar {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        flex-direction: row;
+        gap: 0;
+      }
+      .search-bar input[type="text"] {
+        font-size: 15px;
+        padding: 12px 10px;
+        min-width: 0;
+      }
+      .filter-btn {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
+      }
+      .filter-btn i {
+        font-size: 18px;
+      }
+    }
+    /* MODAL du filtre  */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+      justify-content: center;
+      align-items: center;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      color: #333;
+      position: relative;
+      animation: slideUp 0.4s ease;
+    }
+
+    .modal-content h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+
+    .modal-content .close-icon {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #5B3021;
+    }
+
+    .filter-group {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .filter-group i {
+      color: #5B3021;
+    }
+
+    .filter-group select,
+    .filter-group input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .modal-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .modal-buttons button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .apply-btn {
+      background-color: #5B3021;
+      color: white;
+    }
+
+    .close-btn {
+      background-color: #ccc;
+      color: black;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Section cartes annonces */
+.cards-section {
+  background: #fafafa;
+  padding: 40px 0;
+}
+
+.cards-section h2 {
+  margin-left: 2.5cm;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  justify-content: center;
+  max-width: 1400px;      /* Limite la largeur totale */
+  margin: 0 auto;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  overflow: hidden;
+  flex: 0 1 calc(31% - 24px); /* un peu moins large */
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+  margin-bottom: 24px;
+  min-width: 260px;
+  max-width: 340px;
+}
+
+/* Responsive : 2 cartes par ligne sur tablette */
+@media (max-width: 1200px) {
+  .card {
+    flex: 0 1 calc(50% - 32px);
+  }
+}
+
+/* Responsive : 1 carte par ligne sur mobile */
+@media (max-width: 800px) {
+  .cards-container {
+    gap: 16px;
+  }
+  .card {
+    flex: 0 1 100%;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+}
+
+.card img {
+  width: 100%;
+  height: 140px; /* moins haut */
+  object-fit: cover;
+  border-radius: 16px 16px 0 0;
+  margin-bottom: 0;
+}
+
+.card-content {
+  padding: 16px 18px 12px 18px; /* padding réduit */
+}
+
+.card-content h3 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+}
+
+.card-content .price {
+  color: #e53935;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0 0 10px 0;
+}
+
+.card-content .location {
+  color: #757575;
+  font-size: 16px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card-btn {
+  align-self: flex-end;
+  margin-top: 10px;
+  padding: 8px 22px;
+  border: none;
+  border-radius: 22px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: #ff2d00;
+  cursor: pointer;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(255,45,0,0.12);
+}
+
+.card-btn.louer {
+  background: #ff2d00;
+}
+
+.card-btn.acheter {
+  background: #d10000;
+}
